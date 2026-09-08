@@ -1197,6 +1197,70 @@ button:focus-visible {
         line-height: 1.5;
         word-break: break-word;
     }
+
+    /* =========================================================
+       FOUNDER & ABOUT BRAND STORY — TEXT ALIGNMENT FIX (MOBILE)
+       ========================================================= */
+
+    /* Container text balance & spacing */
+    .founder-text,
+    .brand-story-text {
+        text-align: left;
+        padding: 0 4px;
+        width: 100%;
+    }
+
+    /* Eyebrow & Main Headings */
+    .founder-text .section-eyebrow,
+    .brand-story-text .section-eyebrow {
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .founder-text .section-title,
+    .brand-story-text .section-title {
+        font-size: 1.85rem;
+        line-height: 1.25;
+        margin-bottom: 16px;
+    }
+
+    /* Neelam Kukreja intro/lede paragraph */
+    
+
+    /* Sub-headings (Her Story, Her Philosophy, Experience) */
+    .founder-block {
+        margin-bottom: 20px;
+    }
+
+    .founder-block h3 {
+        font-size: 1.25rem;
+        margin-top: 24px;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+
+    /* All paragraphs inside Founder & Brand Story */
+    .founder-block p,
+    .brand-story-text p,
+    .founder-lede {
+        text-align: justify;
+        text-justify: inter-word;
+        text-wrap: pretty;
+        hyphens: auto;
+        -webkit-hyphens: auto;
+        word-break: normal;
+        font-size: 0.95rem;
+        line-height: 1.75;
+        margin-bottom: 16px;
+        color: var(--text-muted);
+    }
+    /* Image aur text ke beech mobile spacing */
+    .founder-grid,
+    .brand-story-grid {
+        gap: 36px;
+    }
 }
 /* ==========================================================================
    RESPONSIVE — MOBILE
