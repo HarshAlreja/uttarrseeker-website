@@ -1,0 +1,102 @@
+/* ==========================================================================
+   SERVICES PAGE — services.css
+   Styles specific to services.html only. Colors, fonts, navbar, and footer
+   still come from the shared style.css (loaded before this file).
+   ========================================================================== */
+
+/* --- Page heading --- */
+.services-intro {
+    padding-bottom: 24px;
+}
+
+.services-lede {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* --- Alternating service rows --- */
+.services-detail {
+    padding-top: 24px;
+}
+
+.service-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-bottom: 112px;
+}
+
+.service-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Odd rows: image left, text right (default DOM order).
+   Even rows get the .reverse class: image right, text left. */
+.service-row .service-media {
+    order: 1;
+}
+
+.service-row .service-copy {
+    order: 2;
+}
+
+.service-row.reverse .service-media {
+    order: 2;
+}
+
+.service-row.reverse .service-copy {
+    order: 1;
+}
+
+.service-image {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+}
+
+.service-image:has(img) {
+    aspect-ratio: auto;
+    height: auto;
+    background: none;
+    overflow: visible;
+}
+
+.service-image img {
+    height: auto;
+    object-fit: contain;
+}
+
+.service-copy p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.service-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.service-copy .section-title {
+    margin-bottom: 20px;
+}
+
+/* --- Responsive: stack image above text on tablet/mobile,
+       always image-first regardless of left/right on desktop --- */
+@media (max-width: 860px) {
+    .service-row {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 72px;
+    }
+
+    .service-row .service-media,
+    .service-row.reverse .service-media {
+        order: 1;
+    }
+
+    .service-row .service-copy,
+    .service-row.reverse .service-copy {
+        order: 2;
+    }
+}
