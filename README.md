@@ -2,7 +2,7 @@
 
 > **Freelance Client Project**
 
-A 7-page responsive website developed for **Uttarrseeker**, a spiritual guidance and consulting brand based in **Bangalore, India**.
+A 6-page responsive website developed for **Uttarrseeker**, a spiritual guidance and consulting brand based in **Bangalore, India**.
 
 The project was developed as a freelance engagement, starting from understanding the client's requirements and translating their vision into a functional, responsive website, through to deployment and hosting.
 
@@ -26,7 +26,7 @@ As the freelance developer, I was responsible for the project from requirement g
 ### Website Development
 
 * Designed and developed the website based on the client's requirements.
-* Built a 7-page responsive website using HTML, CSS, and JavaScript.
+* Built a 6-page responsive website using HTML, CSS, and JavaScript.
 * Implemented responsive layouts to ensure the website works across desktop and mobile devices.
 * Added interactive elements and frontend functionality using JavaScript.
 * Focused on maintaining a clean, simple, and user-friendly interface.
@@ -40,7 +40,7 @@ As the freelance developer, I was responsible for the project from requirement g
 
 ## Key Highlights
 
-* 7-page responsive website
+* 6-page responsive website
 * Built from scratch based on client requirements
 * Direct client communication and requirement gathering
 * Responsive desktop and mobile design
