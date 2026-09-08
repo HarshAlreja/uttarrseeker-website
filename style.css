@@ -954,6 +954,17 @@ button:focus-visible {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    /* .services .card-grid and .products .card-grid are set with two
+       classes (specificity 0,2,0) in the base styles above, which beats
+       the single-class .card-grid rule right above no matter where either
+       rule sits in the file. Every responsive override for the card grid
+       has to repeat those two selectors explicitly or it gets silently
+       ignored — that was the bug making Products/Services stay locked at
+       their desktop column count on phones. */
+    .products .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .hero {
         gap: 40px;
     }
@@ -970,6 +981,20 @@ button:focus-visible {
 
     .footer-logo-image {
         height: 80px;
+    }
+
+    /* Same specificity issue as the tablet block above: these two-class
+       selectors have to be repeated here, or the desktop 3-col/4-col
+       rules keep winning and every card's text wraps one word per line. */
+    .services .card-grid,
+    .products .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Tightened so the WhatsApp button + hamburger can't get pushed past
+       the right edge on narrower phones/small tablets in this range. */
+    .nav-right-wrap {
+        gap: 16px;
     }
 
     .nav-links {
@@ -1076,12 +1101,26 @@ button:focus-visible {
         padding: 64px 0;
     }
 
-    .card-grid {
+    .container {
+        padding: 0 16px;
+    }
+
+    .card-grid,
+    .services .card-grid,
+    .products .card-grid {
         grid-template-columns: 1fr;
     }
 
     .navbar-right {
         gap: 10px;
+    }
+
+    .nav-right-wrap {
+        gap: 10px;
+    }
+
+    .navbar-inner {
+        padding: 12px 16px;
     }
 
     .whatsapp-btn span {
@@ -1092,10 +1131,32 @@ button:focus-visible {
         padding: 10px;
     }
 
+    /* Testimonials: a fixed 280px card plus the two 42px scroll arrows
+       and their gaps add up to more than a phone's viewport (a 360-390px
+       wide screen has ~310-360px left after the container padding), so
+       the card was overflowing and getting cropped by html's
+       overflow-x: hidden. Scaling the card to the viewport width and
+       hiding the arrows (a swipe scrolls the track fine on touch) fixes
+       the crop. */
+    .testimonial-wrap {
+        gap: 0;
+    }
+
+    .scroll-btn {
+        display: none;
+    }
+
+    .testimonial-track {
+        scroll-snap-type: x mandatory;
+        padding: 8px 0 20px;
+    }
+
     .testimonial-card {
-        flex: 0 0 280px;
+        flex: 0 0 84vw;
+        max-width: 320px;
         min-height: 300px;
-        padding: 28px 24px;
+        padding: 28px 22px;
+        scroll-snap-align: center;
     }
 
     .logo-image {
@@ -1104,6 +1165,27 @@ button:focus-visible {
 
     .footer-logo-image {
         height: 72px;
+    }
+}
+
+/* ==========================================================================
+   RESPONSIVE — SMALL PHONES (older/compact devices, ~360px and under)
+   ========================================================================== */
+
+@media (max-width: 380px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .testimonial-card {
+        flex-basis: 88vw;
+        padding: 24px 18px;
     }
 }
 
