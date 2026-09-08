@@ -409,6 +409,7 @@ button:focus-visible {
     border: none;
     padding: 4px;
     flex-shrink: 0;
+    margin: 4px;
 }
 
 .hamburger span {
@@ -418,6 +419,7 @@ button:focus-visible {
     background: var(--text-dark);
     border-radius: 2px;
     transition: transform var(--transition), opacity var(--transition);
+    margin:2px;
 }
 
 .hamburger.open span:nth-child(1) {
@@ -998,20 +1000,16 @@ button:focus-visible {
         height: 80px;
     }
 
-    /* Same specificity issue as the tablet block above: these two-class
-       selectors have to be repeated here, or the desktop 3-col/4-col
-       rules keep winning and every card's text wraps one word per line. */
     .services .card-grid,
     .products .card-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Tightened so the WhatsApp button + hamburger can't get pushed past
-       the right edge on narrower phones/small tablets in this range. */
     .nav-right-wrap {
         gap: 16px;
     }
 
+    /* Mobile menu drawer */
     .nav-links {
         position: absolute;
         top: 100%;
@@ -1024,31 +1022,35 @@ button:focus-visible {
         overflow: hidden;
         box-shadow: 0 12px 24px rgba(0, 40, 10, 0.08);
         transition: max-height var(--transition);
+        z-index: 100;
     }
 
     .nav-links.open {
-        /* The old fixed 300px cap was the actual bug: Home + About + the
-           Products toggle row alone already use ~170px, leaving almost no
-           room for the Products dropdown links, and none at all for
-           Services below it — that's what was clipping/blanking names on
-           phone. This caps against the viewport instead (minus roughly the
-           navbar's own height) and scrolls if the open menu is ever taller
-           than the screen, so nothing gets silently cut off again. */
         max-height: calc(100vh - 72px);
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
+    /* Home, About aur Services sabko barabar 16px padding aur full width */
     .nav-link {
+        display: block;
+        width: 100%;
         padding: 16px 24px;
         border-bottom: 1px solid var(--border-soft);
+        box-sizing: border-box;
+        font-size: 1rem;
+        text-align: left;
     }
 
     .hamburger {
         display: flex;
     }
 
+    /* Vertical stack taaki Services dropdown ke neeche natural flow me rahe */
     .nav-item {
         width: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .dropdown-toggle {
@@ -1056,6 +1058,8 @@ button:focus-visible {
         justify-content: space-between;
         padding: 16px 24px;
         border-bottom: 1px solid var(--border-soft);
+        font-size: 1rem;
+        box-sizing: border-box;
     }
 
     .dropdown-menu {
@@ -1069,39 +1073,45 @@ button:focus-visible {
         padding: 0;
         max-height: 0;
         overflow: hidden;
+        background: var(--background-off-white);
         transition: max-height var(--transition);
     }
 
-    /* Re-declared here (not just on .dropdown-menu above) because the
-       desktop ".nav-item.open .dropdown-menu" rule is a two-class selector
-       and otherwise wins over the single-class reset on specificity alone,
-       leaving the sideways desktop transform active on phones. */
     .nav-item.open .dropdown-menu {
         max-height: 1000px;
         transform: none;
     }
 
     .dropdown-link {
-        padding: 12px 40px;
+        display: block;
+        width: 100%;
+        padding: 14px 36px;
         border-bottom: 1px solid var(--border-soft);
         border-radius: 0;
+        font-size: 0.95rem;
+        box-sizing: border-box;
     }
 
-    /* A vh-based height (64-84vh) forces a very tall, narrow crop box on
-       phones. Since .hero-media/.hero-slide use absolute positioning for
-       the crossfade, the box still needs an explicit height (it can't
-       size itself to the image like .category-hero does) — so instead of
-       viewport height, size it off the banner's own aspect ratio and stop
-       cropping it. If your banner images aren't roughly square, change
-       the "1 / 1" below to match their real width/height (e.g. 16 / 9 for
-       a wide banner, 4 / 5 for a tall one) so nothing is ever cut off. */
+    /* Banner aspect ratio */
     .hero {
         min-height: 0;
-        aspect-ratio: 1 / 1;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+    }
+
+    .hero-media {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .hero-media .image-placeholder img {
+        width: 100%;
+        height: 100%;
         object-fit: contain;
+        background: var(--background-off-white);
     }
 
     .founder-grid,
@@ -1132,7 +1142,6 @@ button:focus-visible {
         text-align: left;
     }
 }
-
 /* ==========================================================================
    RESPONSIVE — MOBILE
    ========================================================================== */
