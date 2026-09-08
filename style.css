@@ -333,11 +333,24 @@ button:focus-visible {
     z-index: 50;
 }
 
-.nav-item:hover .dropdown-menu,
 .nav-item.open .dropdown-menu {
     opacity: 1;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
+}
+
+/* Hover-to-open is desktop/mouse behavior only. Without this guard, touch
+   browsers can latch a ":hover" state after a tap, and — more importantly —
+   this selector's specificity (0,2,0) beats the single-class ".dropdown-menu"
+   reset inside the phone media query below, so the desktop transform leaks
+   through and shifts the dropdown sideways on mobile. Restricting it to
+   real pointer devices removes that leak entirely. */
+@media (hover: hover) and (pointer: fine) {
+    .nav-item:hover .dropdown-menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 .dropdown-link {
@@ -387,19 +400,21 @@ button:focus-visible {
 .hamburger {
     display: none;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
     gap: 5px;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     background: none;
     border: none;
     padding: 4px;
+    flex-shrink: 0;
 }
 
 .hamburger span {
     display: block;
     height: 2px;
-    width: 100%;
+    width: 24px;
     background: var(--text-dark);
     border-radius: 2px;
     transition: transform var(--transition), opacity var(--transition);
@@ -1049,8 +1064,13 @@ button:focus-visible {
         transition: max-height var(--transition);
     }
 
+    /* Re-declared here (not just on .dropdown-menu above) because the
+       desktop ".nav-item.open .dropdown-menu" rule is a two-class selector
+       and otherwise wins over the single-class reset on specificity alone,
+       leaving the sideways desktop transform active on phones. */
     .nav-item.open .dropdown-menu {
         max-height: 400px;
+        transform: none;
     }
 
     .dropdown-link {
