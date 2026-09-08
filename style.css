@@ -1027,7 +1027,15 @@ button:focus-visible {
     }
 
     .nav-links.open {
-        max-height: 300px;
+        /* The old fixed 300px cap was the actual bug: Home + About + the
+           Products toggle row alone already use ~170px, leaving almost no
+           room for the Products dropdown links, and none at all for
+           Services below it — that's what was clipping/blanking names on
+           phone. This caps against the viewport instead (minus roughly the
+           navbar's own height) and scrolls if the open menu is ever taller
+           than the screen, so nothing gets silently cut off again. */
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
     }
 
     .nav-link {
@@ -1069,7 +1077,7 @@ button:focus-visible {
        and otherwise wins over the single-class reset on specificity alone,
        leaving the sideways desktop transform active on phones. */
     .nav-item.open .dropdown-menu {
-        max-height: 400px;
+        max-height: 1000px;
         transform: none;
     }
 
@@ -1079,8 +1087,21 @@ button:focus-visible {
         border-radius: 0;
     }
 
+    /* A vh-based height (64-84vh) forces a very tall, narrow crop box on
+       phones. Since .hero-media/.hero-slide use absolute positioning for
+       the crossfade, the box still needs an explicit height (it can't
+       size itself to the image like .category-hero does) — so instead of
+       viewport height, size it off the banner's own aspect ratio and stop
+       cropping it. If your banner images aren't roughly square, change
+       the "1 / 1" below to match their real width/height (e.g. 16 / 9 for
+       a wide banner, 4 / 5 for a tall one) so nothing is ever cut off. */
     .hero {
-        min-height: 64vh;
+        min-height: 0;
+        aspect-ratio: 1 / 1;
+    }
+
+    .hero-media .image-placeholder img {
+        object-fit: contain;
     }
 
     .founder-grid,
