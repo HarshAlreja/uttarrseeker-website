@@ -21,12 +21,30 @@
     padding-top: 24px;
 }
 
+.services-detail,
+.services-detail .container {
+    overflow-x: hidden;
+}
+
 .service-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
     align-items: center;
     margin-bottom: 112px;
+    max-width: 100%;
+}
+
+.service-media,
+.service-copy {
+    min-width: 0;
+}
+
+.service-copy p,
+.service-copy h2,
+.service-copy h3 {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .service-row:last-child {
@@ -64,6 +82,9 @@
 }
 
 .service-image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
 }
@@ -79,6 +100,66 @@
 
 .service-copy .section-title {
     margin-bottom: 20px;
+}
+
+/* --- WhatsApp CTA button under each service --- */
+.service-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    padding: 12px 26px;
+    background-color: #178349;
+    color: #ffffff;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(23, 131, 73, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-whatsapp-btn .whatsapp-icon {
+    flex-shrink: 0;
+}
+
+.service-whatsapp-btn:hover,
+.service-whatsapp-btn:focus-visible {
+    background-color: #126439;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(23, 131, 73, 0.45);
+}
+
+.service-whatsapp-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(23, 131, 73, 0.35);
+}
+
+.service-whatsapp-btn:focus-visible {
+    outline: 2px solid #0d4f2c;
+    outline-offset: 3px;
+}
+
+/* Tablet: keep pill button, slightly tighter padding */
+@media (max-width: 860px) {
+    .service-whatsapp-btn {
+        margin-top: 20px;
+        padding: 11px 22px;
+        font-size: 14.5px;
+    }
+}
+
+/* Mobile: full-width button, easier to tap */
+@media (max-width: 480px) {
+    .service-whatsapp-btn {
+        width: 100%;
+        padding: 13px 20px;
+        font-size: 15px;
+    }
 }
 
 /* --- Responsive: stack image above text on tablet/mobile,
